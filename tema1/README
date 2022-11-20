@@ -1,0 +1,48 @@
+---      ALGORITMI PARALELI SI DISTRIBUITI     ---
+  Tema #1 Procesare paralela folosind paradigma
+                    Map-Reduce
+  
+  331 CC - Pavel Calin Gabriel  
+
+tema1.cpp
+
+*mapper_function/reducer_function
+
+    - pentru cele doua tipuri de thread-uri am
+construit doua functii mapper_function si reducer_function
+pe care le atribui thread-urilor intr-o singura bucla for
+    - pentru organizarea functiei pentru mapper am folosit
+o structura definita in tema1.h , in aceasta structura am
+construit un vector care retine fisierele ce nu au fost inca
+procesate , un vector cu puterile perfecte precalculate si 
+un vector de vectori in care retin aparitiile puterilor perfecte
+in functie de exponentul cautat
+    - pentru organizarea functiei reducer am folosit vectorul 
+de structuri construit pentru mapper_function , in  prima
+structura am retinut reducer_id pentru cautarea ordonata in 
+functie de exponent in datele de tip reducer
+    - in cadrul aceleasi structuri retin numarul de thread-uri
+reducer si mapper
+
+*get_parameters
+    - se construieste vectorul de fisiere
+    - se atribuie numarul de thread-uri reducer si mapper
+
+*binarySearch
+    - folosit pentru cautarea binara in memoria precalculata
+a puterilor perfecte
+
+*main
+    - se precalculeaza puterile perfecte
+    - se incarca structurile de tip mapper cu lista de fisiere
+si puterile precalculate
+    - create/join pentru thread-uri
+
+Pentru sincronizarea thread-urilor am folosit:
+    - o bariera asigurand terminarea procesarii thread-urilor de tip  
+ mapper inaintea procesarii thread-urilor de tip reducer
+    - un mutex pentru accesul in lista de fisiere , pentru a evita
+editarea simultana a mai multor thread-uri
+    - un mutex pentru incrementarea exponentului in functia de reducer
+    
+Timp alocat: ~10h

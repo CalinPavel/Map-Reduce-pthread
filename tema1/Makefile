@@ -1,9 +1,9 @@
-CFLAGS = -Wall -pthread -g
-CC = g++
+CXXFLAGS = -Wall -Werror -pthread -g
+CXX = g++
 
 
 build:
-	$(CC) $(CFLAGS) -o tema1 tema1.cpp
+	$(CXX) $(CXXFLAGS) -o tema1 tema1.cpp
 
 clean:
 	rm -rf tema1
